@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -43,19 +44,19 @@ public class BattleShip {
         // Variable to track whose turn it is
         boolean player1Turn = true;
 
-        // Main game loop, runs until one player's ships are all sunk
-        while (!isGameOver()) {
+      //   Main game loop, runs until one player's ships are all sunk
+       while (!isGameOver()) {
             if (player1Turn) {
                 System.out.println("Player 1's turn:");
-                printGrid(player1TrackingGrid);
+               printGrid(player1TrackingGrid);
                 playerTurn(player2Grid, player1TrackingGrid);
-            } else {
-                System.out.println("Player 2's turn:");
+           } else {
+               System.out.println("Player 2's turn:");
                 printGrid(player2TrackingGrid);
                 playerTurn(player1Grid, player2TrackingGrid);
             }
-            player1Turn = !player1Turn;
-        }
+           player1Turn = !player1Turn;
+       }
 
         System.out.println("Game Over!");
     }
@@ -66,7 +67,13 @@ public class BattleShip {
       @param grid The grid to initialize.
      */
     static void initializeGrid(char[][] grid) {
-        //todo
+     for (int i = 0; i < GRID_SIZE; i++) {
+         for (int j = 0; j < GRID_SIZE; j++) {
+             grid[i][j] = '~';
+         }
+     }
+
+
     }
 
     /**
