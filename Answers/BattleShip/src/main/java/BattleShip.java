@@ -130,10 +130,10 @@ public class BattleShip {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         boolean check = isValidInput(input);
-        char colchar = input.charAt(0);
-        int row = input.charAt(1) - '0';
-        int col = 0;
         if (check == true) {
+            char colchar = input.charAt(0);
+            int row = input.charAt(1) - '0';
+            int col = 0;
             switch (colchar) {
                 case 'A':
                     col = 0;
@@ -170,7 +170,7 @@ public class BattleShip {
                 System.out.println("Hit!");
                 opponentGrid[row][col] = 'X';
                 trackingGrid[row][col] = 'X';
-            } else if (opponentGrid[row][col] == 'X' || opponentGrid[row][col] == '0') {
+            } else if (opponentGrid[row][col] == 'X' || opponentGrid[row][col] == '0' ) {
                 System.out.println("Repeated input!");
             } else {
                 System.out.println("Miss!");
@@ -182,10 +182,8 @@ public class BattleShip {
 
 
     static boolean isGameOver() {
-        boolean check = allShipsSunk(player1Grid) || allShipsSunk(player2Grid);
-        if (check == false) {
-            return true;
-        } else return false;
+        boolean check = ( allShipsSunk(player1Grid) || allShipsSunk(player2Grid) ) ;
+        return check;
     }
 
 
@@ -193,12 +191,12 @@ public class BattleShip {
         for (int i = 0; i < GRID_SIZE; i++) {
             for (int j = 0; j < GRID_SIZE; j++) {
                 if (grid[i][j] == '*') {
-                    return true;
+                    return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 
 
@@ -216,7 +214,12 @@ public class BattleShip {
         for (int i = 0; i < GRID_SIZE; i++) {
             System.out.print(0 + i + " ");
             for (int j = 0; j < GRID_SIZE; j++) {
-                System.out.print(grid[i][j] + " ");
+                if (grid[i][j] == 'X') {
+                    System.out.print("\u001B[31m" + grid[i][j] + " \u001B[0m");
+                }else if (grid[i][j] == '0') {
+                    System.out.print("\033[0;97m" + grid[i][j] + " \u001B[0m");}
+                else{
+                System.out.print(grid[i][j] + " ");}
             }
 
             System.out.println();
